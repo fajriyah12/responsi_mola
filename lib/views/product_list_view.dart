@@ -4,6 +4,7 @@ import 'package:provider/provider.dart';
 import '../providers/product_provider.dart';
 import '../widgets/product_card.dart';
 import 'product_detail_view.dart';
+import 'location_view.dart';
 
 class ProductListView extends StatefulWidget {
   const ProductListView({super.key});
@@ -33,6 +34,7 @@ class _ProductListViewState extends State<ProductListView> {
           'Katalog Produk (Arsitektur Berlapis)',
         ),
         actions: [
+          // Tombol refresh Pertemuan 10
           IconButton(
             icon: const Icon(Icons.refresh),
             tooltip: 'Muat ulang',
@@ -40,8 +42,23 @@ class _ProductListViewState extends State<ProductListView> {
               context.read<ProductProvider>().fetchProducts();
             },
           ),
+
+          // Tombol lokasi Pertemuan 11
+          IconButton(
+            icon: const Icon(Icons.location_on),
+            tooltip: 'Informasi Lokasi',
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => const LocationView(),
+                ),
+              );
+            },
+          ),
         ],
       ),
+
       body: Consumer<ProductProvider>(
         builder: (context, provider, child) {
           if (provider.isLoading) {
