@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-// import 'column_widget.dart';
-// import 'row_widget.dart';
-import 'first_widget.dart';
+import 'package:provider/provider.dart';
+
+import 'providers/product_provider.dart';
+import 'views/product_list_view.dart';
 
 void main() {
   runApp(const MyApp());
@@ -12,15 +13,19 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Praktikum Mobile Lanjut',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(
-          seedColor: Colors.deepPurple,
+    return ChangeNotifierProvider(
+      create: (_) => ProductProvider(),
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Praktikum Mobile Lanjut',
+        theme: ThemeData(
+          colorScheme: ColorScheme.fromSeed(
+            seedColor: Colors.deepPurple,
+          ),
+          useMaterial3: true,
         ),
-        useMaterial3: true,
+        home: const ProductListView(),
       ),
-      home: const FirstWidget(),
     );
   }
 }
